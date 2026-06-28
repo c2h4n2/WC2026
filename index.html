@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>World Cup 2026 AI Predictor</title>
+<style>
+:root{--bg:#08111f;--panel:#101d33;--panel2:#13253f;--text:#eef6ff;--muted:#9eb2cc;--accent:#31d0aa;--accent2:#6ea8fe;--warn:#ffd166;--bad:#ff6b6b;--line:#263b5c}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#173b67,#08111f 45%,#050914);color:var(--text)}header{padding:28px 18px 16px;max-width:1180px;margin:auto}nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.tab{border:1px solid var(--line);background:#0d1a2e;color:var(--text);padding:10px 14px;border-radius:999px;cursor:pointer}.tab.active,.tab:hover{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#03101b;border:0}.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;align-items:stretch}.card{background:rgba(16,29,51,.88);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 20px 70px rgba(0,0,0,.25)}h1{font-size:clamp(34px,6vw,64px);line-height:.95;margin:0 0 12px}.subtitle{color:var(--muted);font-size:18px;max-width:760px}.badge{display:inline-flex;gap:8px;align-items:center;background:#102b36;border:1px solid #1e665d;color:#bfffee;padding:8px 12px;border-radius:999px;font-weight:700}.grid{max-width:1180px;margin:18px auto;padding:0 18px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.span12{grid-column:span 12}.span8{grid-column:span 8}.span6{grid-column:span 6}.span4{grid-column:span 4}.span3{grid-column:span 3}.controls{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}select,input,button{font:inherit}select,input{background:#0a1628;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:180px}button.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0;border-radius:12px;color:#06111d;font-weight:800;padding:12px 16px;cursor:pointer}button.secondary{background:#0b1729;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px 16px;cursor:pointer}.match{display:flex;justify-content:space-between;gap:14px;align-items:center;border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;background:#0b1729}.team{display:flex;align-items:center;gap:10px;min-width:0}.flag{font-size:31px;background:#fff;border-radius:50%;width:48px;height:48px;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}.team b{display:block}.team small,.muted{color:var(--muted)}.prob{height:12px;background:#08111f;border-radius:999px;overflow:hidden;border:1px solid var(--line);margin:8px 0}.prob div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:50%}.result{font-size:26px;font-weight:900}.pill{display:inline-block;padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);margin:3px;font-size:13px}.hidden{display:none}.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.team-card{background:#0b1729;border:1px solid var(--line);border-radius:16px;padding:14px}.factor{display:flex;justify-content:space-between;border-bottom:1px solid #1e2f4c;padding:10px 0}.factor:last-child{border-bottom:0}.notice{background:#171f35;border-left:4px solid var(--warn);padding:14px;border-radius:14px;color:#d9e4f5}.footer{text-align:center;color:var(--muted);padding:28px}@media(max-width:850px){.hero{grid-template-columns:1fr}.span8,.span6,.span4,.span3{grid-column:span 12}.match{display:block}.result{text-align:left;margin:12px 0}.flag{width:42px;height:42px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div class="card">
+      <span class="badge">🏆 World Cup 2026 Predictor</span>
+      <h1>AI-style match predictions, no backend needed.</h1>
+      <p class="subtitle">This version works on GitHub Pages by itself. It uses built-in demo data for teams, fixtures, live factors, weather impact, form, injuries, lineups, and tactical scores.</p>
+      <nav>
+        <button class="tab active" data-view="predictor">Predictor</button>
+        <button class="tab" data-view="matches">Matches</button>
+        <button class="tab" data-view="teams">Teams</button>
+        <button class="tab" data-view="factors">Live Factors</button>
+      </nav>
+    </div>
+    <div class="card">
+      <h2>Current Demo Champion Pick</h2>
+      <div class="team"><span class="flag">🇦🇷</span><div><b>Argentina</b><small>Balanced squad + tournament experience</small></div></div>
+      <div class="prob"><div style="width:68%"></div></div>
+      <p class="muted">Demo confidence: 68%</p>
+    </div>
+  </div>
+</header>
+<main class="grid">
+<section id="predictor" class="span12 view">
+  <div class="card">
+    <h2>Match Predictor</h2>
+    <p class="muted">Choose any two teams and click predict. Everything runs inside this page.</p>
+    <div class="controls"><select id="teamA"></select><select id="teamB"></select><button class="primary" id="predictBtn">Predict Match</button><button class="secondary" id="randomBtn">Random Match</button></div>
+    <div id="predictionOutput"></div>
+  </div>
+</section>
+<section id="matches" class="span12 view hidden"><div class="card"><h2>World Cup 2026 Demo Fixtures</h2><div id="matchList"></div></div></section>
+<section id="teams" class="span12 view hidden"><div class="card"><h2>Teams</h2><input id="teamSearch" placeholder="Search country..." /><div id="teamGrid" class="team-grid" style="margin-top:14px"></div></div></section>
+<section id="factors" class="span12 view hidden"><div class="card"><h2>Live Factors Used by the Demo Model</h2><div class="notice">This no-backend version cannot fetch real-time lineups or weather automatically. It shows how those factors affect predictions using built-in demo values.</div><div id="factorList" style="margin-top:12px"></div></div></section>
+</main>
+<div class="footer">World Cup 2026 AI Predictor — GitHub Pages version</div>
+<script>
+const teams=[
+ ['Argentina','ARG','🇦🇷',92,88,84],['France','FRA','🇫🇷',91,90,82],['Brazil','BRA','🇧🇷',90,87,80],['England','ENG','🏴',88,86,79],['Spain','ESP','🇪🇸',87,85,78],['Portugal','POR','🇵🇹',86,84,77],['Germany','GER','🇩🇪',85,83,76],['Netherlands','NED','🇳🇱',84,82,75],['United States','USA','🇺🇸',79,76,73],['Mexico','MEX','🇲🇽',78,75,72],['Canada','CAN','🇨🇦',76,74,71],['Japan','JPN','🇯🇵',80,78,74],['Morocco','MAR','🇲🇦',82,80,76],['Croatia','CRO','🇭🇷',81,79,75],['Uruguay','URU','🇺🇾',83,81,74],['Belgium','BEL','🇧🇪',82,79,73],['Switzerland','SUI','🇨🇭',79,78,72],['Colombia','COL','🇨🇴',81,79,74],['Senegal','SEN','🇸🇳',78,77,72],['Ghana','GHA','🇬🇭',73,72,69],['Australia','AUS','🇦🇺',72,71,68],['South Korea','KOR','🇰🇷',77,75,70],['Ecuador','ECU','🇪🇨',76,74,70],['Ivory Coast','CIV','🇨🇮',75,73,70],['Norway','NOR','🇳🇴',77,76,70],['Sweden','SWE','🇸🇪',76,75,70],['Austria','AUT','🇦🇹',78,76,72],['Algeria','DZA','🇩🇿',75,74,69],['Egypt','EGY','🇪🇬',74,73,69],['South Africa','RSA','🇿🇦',70,69,66],['Paraguay','PAR','🇵🇾',73,71,67],['Turkey','TUR','🇹🇷',76,74,69]
+].map(x=>({name:x[0],code:x[1],flag:x[2],rating:x[3],form:x[4],depth:x[5]}));
+const fixtures=[['South Africa','Canada','Round of 32'],['Brazil','Japan','Round of 32'],['Germany','Paraguay','Round of 32'],['Netherlands','Morocco','Round of 32'],['France','Sweden','Round of 32'],['Mexico','Ecuador','Round of 32'],['England','DR Congo','Round of 32'],['United States','Bosnia and Herzegovina','Round of 32'],['Spain','Austria','Round of 32'],['Portugal','Croatia','Round of 32'],['Argentina','Cape Verde','Round of 32'],['Colombia','Ghana','Round of 32']];
+function byName(n){return teams.find(t=>t.name===n)||{name:n,code:'TBD',flag:'🌐',rating:68,form:68,depth:65}}
+function score(t){const lineup=rand(70,96),health=rand(65,98),weather=rand(70,95),tactics=rand(68,96),setPieces=rand(65,94);return {lineup,health,weather,tactics,setPieces,total:Math.round(t.rating*.32+t.form*.24+t.depth*.14+lineup*.10+health*.08+weather*.04+tactics*.05+setPieces*.03)}}
+function rand(a,b){return Math.floor(a+Math.random()*(b-a+1))}
+function predict(a,b){if(a.name===b.name){return '<div class="notice">Pick two different teams.</div>'}const A=score(a),B=score(b);let diff=A.total-B.total;let pA=Math.max(8,Math.min(92,50+diff*2.1+rand(-5,5)));let pB=100-pA;let goalsA=Math.max(0,Math.round((A.total/38)+(pA>55?1:0)+rand(-1,1)));let goalsB=Math.max(0,Math.round((B.total/38)+(pB>55?1:0)+rand(-1,1)));let winner=pA>=pB?a:b;return `<div class="match"><div class="team"><span class="flag">${a.flag}</span><div><b>${a.name}</b><small>${a.code} • Power ${A.total}</small></div></div><div class="result">${goalsA} - ${goalsB}</div><div class="team"><span class="flag">${b.flag}</span><div><b>${b.name}</b><small>${b.code} • Power ${B.total}</small></div></div></div><h3>Prediction: ${winner.flag} ${winner.name} to advance</h3><div class="prob"><div style="width:${pA}%"></div></div><p><b>${a.name}</b> ${pA}% • <b>${b.name}</b> ${pB}%</p><div class="grid" style="padding:0;margin:0"><div class="span6 card"><h3>${a.flag} ${a.name} factors</h3>${factorHtml(A)}</div><div class="span6 card"><h3>${b.flag} ${b.name} factors</h3>${factorHtml(B)}</div></div>`}
+function factorHtml(o){return Object.entries(o).filter(([k])=>k!=='total').map(([k,v])=>`<div class="factor"><span>${label(k)}</span><b>${v}/100</b></div>`).join('')}
+function label(k){return ({lineup:'Projected lineup',health:'Player condition',weather:'Weather fit',tactics:'Formation/tactics',setPieces:'Set pieces'})[k]||k}
+function init(){const sA=document.getElementById('teamA'),sB=document.getElementById('teamB');teams.forEach(t=>{sA.innerHTML+=`<option>${t.name}</option>`;sB.innerHTML+=`<option>${t.name}</option>`});sB.value='France';document.getElementById('predictBtn').onclick=()=>document.getElementById('predictionOutput').innerHTML=predict(byName(sA.value),byName(sB.value));document.getElementById('randomBtn').onclick=()=>{let a=teams[rand(0,teams.length-1)],b=teams[rand(0,teams.length-1)];if(a.name===b.name)b=teams[(teams.indexOf(a)+1)%teams.length];sA.value=a.name;sB.value=b.name;document.getElementById('predictionOutput').innerHTML=predict(a,b)};document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));document.getElementById(btn.dataset.view).classList.remove('hidden')});renderMatches();renderTeams();renderFactors();document.getElementById('teamSearch').oninput=e=>renderTeams(e.target.value);document.getElementById('predictionOutput').innerHTML=predict(byName('Argentina'),byName('France'))}
+function renderMatches(){document.getElementById('matchList').innerHTML=fixtures.map(f=>{let a=byName(f[0]),b=byName(f[1]);return `<div class="match"><div class="team"><span class="flag">${a.flag}</span><div><b>${a.name}</b><small>${f[2]}</small></div></div><b>vs</b><div class="team"><span class="flag">${b.flag}</span><div><b>${b.name}</b><small>Demo fixture</small></div></div></div>`}).join('')}
+function renderTeams(q=''){q=q.toLowerCase();document.getElementById('teamGrid').innerHTML=teams.filter(t=>t.name.toLowerCase().includes(q)||t.code.toLowerCase().includes(q)).map(t=>`<div class="team-card"><div class="team"><span class="flag">${t.flag}</span><div><b>${t.name}</b><small>${t.code}</small></div></div><p><span class="pill">Rating ${t.rating}</span><span class="pill">Form ${t.form}</span><span class="pill">Depth ${t.depth}</span></p></div>`).join('')}
+function renderFactors(){const factors=['Confirmed lineups','Player injuries and condition','Coach formation','Set-piece strength','Weather at stadium','Team form','Squad depth','Tournament experience','Travel and fatigue','Betting-market signal'];document.getElementById('factorList').innerHTML=factors.map((f,i)=>`<div class="factor"><span>${i+1}. ${f}</span><b>${rand(65,96)}/100</b></div>`).join('')}
+init();
+</script>
+</body>
+</html>
